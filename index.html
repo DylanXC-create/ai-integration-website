@@ -19,8 +19,7 @@
         .upper-section {
             background-color: #2e2e2e; /* Matte dark grey for upper section */
             color: #ffffff;
-            height: auto; /* Adjust height dynamically */
-            min-height: 100vh; /* Ensure it covers the viewport initially */
+            height: 70vh; /* Adjusted to end above Amherst, approximately 70% of viewport */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -34,7 +33,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100vh; /* Full viewport height */
+            height: 100%;
         }
         .summary h1 {
             font-family: 'Montserrat', sans-serif;
@@ -51,19 +50,17 @@
             margin: 0;
             line-height: 1.2;
         }
-        .spacer {
-            height: 100px; /* Space to push towns below the viewport */
-        }
         .lower-section {
             background-color: #ffffff; /* White background for lower section */
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-grow: 1; /* Allow lower section to take remaining space */
         }
         .locations-label {
             font-family: 'Courgette', cursive;
-            font-size: 1.5rem;
+            font-size: 2rem; /* Increased font size */
             color: #2e2e2e; /* Match upper section color */
             margin-bottom: 20px;
             text-align: center;
@@ -77,11 +74,11 @@
         .town-item {
             position: relative;
             width: 100%;
-            padding: 15px 0;
-            border-top: 1px solid #2e2e2e; /* Thin horizontal line, matching upper section color */
+            padding: 25px 0; /* Increased padding for larger sections */
+            border-top: 2px solid #2e2e2e; /* Thicker line, matching upper section color */
         }
         .town-item:last-child {
-            border-bottom: 1px solid #2e2e2e; /* Add line to last item */
+            border-bottom: 2px solid #2e2e2e; /* Add line to last item */
         }
         .town-header {
             display: flex;
@@ -94,13 +91,13 @@
             color: #2e2e2e; /* Match upper section color */
             text-decoration: none;
             font-family: 'Courgette', cursive;
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Increased font size */
             letter-spacing: 1px;
             text-align: center;
             width: 100%; /* Center text within flex item */
         }
         .town-header .arrow {
-            font-size: 1.2rem;
+            font-size: 1.5rem; /* Increased arrow size */
             color: #2e2e2e; /* Match upper section color */
             transition: transform 0.3s;
         }
@@ -109,15 +106,16 @@
         }
         .intersections {
             display: none; /* Hidden by default */
-            padding: 10px 20px;
+            padding: 5px 20px; /* Reduced padding to move closer to town names */
             background-color: #f8f8f8; /* Slightly off-white for contrast */
+            margin-top: 5px; /* Reduced spacing above dropdown */
         }
         .intersections.show {
             display: block; /* Show when toggled */
         }
         @media (max-width: 768px) {
             .upper-section {
-                min-height: 100vh;
+                height: 70vh; /* Maintain proportion */
             }
             .content {
                 margin: 0 10px;
@@ -128,14 +126,17 @@
             .summary p {
                 font-size: 1.2rem;
             }
+            .locations-label {
+                font-size: 1.5rem;
+            }
             .town-header a {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
             .town-header .arrow {
-                font-size: 1rem;
-            }
-            .locations-label {
                 font-size: 1.2rem;
+            }
+            .town-item {
+                padding: 20px 0; /* Slightly reduced for mobile */
             }
         }
     </style>
@@ -148,8 +149,6 @@
                 <p>Real-time traffic analytics, showing insight on benefits from AI-controlled traffic lights delivering by minimizing delays and reducing costs at key intersections.</p>
             </div>
         </div>
-        <div class="spacer"></div>
-        <!-- Ensure towns are below the viewport -->
     </div>
     <div class="lower-section">
         <div class="locations-label">Locations</div>
