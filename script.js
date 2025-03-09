@@ -74,7 +74,18 @@ function initializeTrafficData() {
     trafficDiv.innerHTML = "";
     summaryDiv.innerHTML = "";
 
-    const locations = ["main_st_bailey", "walden_bailey"];
+    const locations = [
+        "main_st_bailey",
+        "walden_bailey",
+        "hertel_main",
+        "clinton_bailey",
+        "transit_sheridan",
+        "ferry_mass_richmond",
+        "porter_jersey_normal",
+        "niagara_east_robinson",
+        "elmwood_forest",
+        "grant_ferry"
+    ];
     locations.forEach(location => fetchTrafficData(location));
 
     fetchTrafficSummary();
