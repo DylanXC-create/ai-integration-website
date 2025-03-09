@@ -11,20 +11,21 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh; /* Ensure body takes full viewport height */
             overflow: auto; /* Allow scrolling for towns */
         }
         .upper-section {
             background-color: #2e2e2e; /* Matte dark grey for upper section */
             color: #ffffff;
-            height: 70vh; /* Adjusted to end above Amherst, approximately 70% of viewport */
+            flex: 1; /* Take remaining space */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             flex-direction: column;
+            min-height: calc(100vh - 240px); /* Adjusted to end above Amherst */
         }
         .content {
             text-align: left;
@@ -56,11 +57,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            flex-grow: 1; /* Allow lower section to take remaining space */
         }
         .locations-label {
             font-family: 'Courgette', cursive;
-            font-size: 2rem; /* Increased font size */
+            font-size: 2rem;
             color: #2e2e2e; /* Match upper section color */
             margin-bottom: 20px;
             text-align: center;
@@ -74,7 +74,7 @@
         .town-item {
             position: relative;
             width: 100%;
-            padding: 25px 0; /* Increased padding for larger sections */
+            padding: 25px 0; /* Larger sections */
             border-top: 2px solid #2e2e2e; /* Thicker line, matching upper section color */
         }
         .town-item:last-child {
@@ -91,13 +91,13 @@
             color: #2e2e2e; /* Match upper section color */
             text-decoration: none;
             font-family: 'Courgette', cursive;
-            font-size: 1.5rem; /* Increased font size */
+            font-size: 1.5rem;
             letter-spacing: 1px;
             text-align: center;
             width: 100%; /* Center text within flex item */
         }
         .town-header .arrow {
-            font-size: 1.5rem; /* Increased arrow size */
+            font-size: 1.5rem;
             color: #2e2e2e; /* Match upper section color */
             transition: transform 0.3s;
         }
@@ -106,16 +106,16 @@
         }
         .intersections {
             display: none; /* Hidden by default */
-            padding: 5px 20px; /* Reduced padding to move closer to town names */
+            padding: 2px 20px; /* Further reduced padding to move closer to town names */
             background-color: #f8f8f8; /* Slightly off-white for contrast */
-            margin-top: 5px; /* Reduced spacing above dropdown */
+            margin-top: 2px; /* Further reduced spacing above dropdown */
         }
         .intersections.show {
             display: block; /* Show when toggled */
         }
         @media (max-width: 768px) {
             .upper-section {
-                height: 70vh; /* Maintain proportion */
+                min-height: calc(100vh - 200px); /* Adjusted for mobile */
             }
             .content {
                 margin: 0 10px;
@@ -136,7 +136,7 @@
                 font-size: 1.2rem;
             }
             .town-item {
-                padding: 20px 0; /* Slightly reduced for mobile */
+                padding: 20px 0;
             }
         }
     </style>
