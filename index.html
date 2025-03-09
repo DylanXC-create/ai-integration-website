@@ -4,81 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buffalo Traffic Optimization Dashboard</title>
-    <!-- Optional: Include Bootstrap for professional styling -->
+    <!-- Optional: Bootstrap for responsive design -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        .header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header h1 {
+            background-color: #2e2e2e; /* Matte dark grey background */
+            color: #ffffff;
             margin: 0;
-            font-size: 2.5rem;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .traffic-section, .summary-section {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        .traffic-section h2, .summary-section h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 10px;
-        }
-        .intersection {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-left: 4px solid #3498db;
-        }
-        .error {
-            color: #e74c3c;
+        .header-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.2rem;
+            color: #b0b0b0;
             font-weight: bold;
         }
-        .table-responsive {
-            margin-top: 15px;
+        .summary {
+            text-align: center;
+            max-width: 800px;
+        }
+        .summary h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .summary p {
+            font-size: 1.5rem;
+            margin: 0;
         }
         @media (max-width: 768px) {
-            .header h1 {
+            .summary h1 {
                 font-size: 2rem;
             }
-            .container {
-                padding: 0 10px;
+            .summary p {
+                font-size: 1.2rem;
+            }
+            .header-label {
+                font-size: 1rem;
+                top: 15px;
+                left: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Buffalo Traffic Optimization Dashboard</h1>
-    </div>
-    <div class="container">
-        <div class="traffic-section">
-            <h2>Intersection Traffic Data</h2>
-            <div id="traffic-data">
-                <p>Loading traffic data...</p>
-            </div>
-        </div>
-        <div class="summary-section">
-            <h2>Traffic Summary</h2>
-            <div id="traffic-summary">
-                <p>Loading summary...</p>
-            </div>
-        </div>
+    <div class="header-label">AI Traffic Optimization</div>
+    <div class="summary">
+        <h1>Optimizing Buffalo's Traffic Flow</h1>
+        <p>This dashboard leverages AI to analyze traffic data, providing insights to reduce delays and save costs at key intersections.</p>
     </div>
     <script src="script.js"></script>
 </body>
