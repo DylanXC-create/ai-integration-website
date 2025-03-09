@@ -7,3 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     }
 });
+
+// Function to toggle the intersections dropdown
+function toggleIntersections(header) {
+    const intersections = header.nextElementSibling;
+    const arrow = header.querySelector(".arrow");
+    intersections.classList.toggle("show");
+    arrow.classList.toggle("down");
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buffalo Traffic Optimization Dashboard</title>
-    <!-- Google Fonts for Montserrat (bold title) and Roboto Condensed (summary/navigation) -->
+    <!-- Google Fonts for Montserrat (bold title) and Roboto Condensed (summary/towns) -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet" crossorigin="anonymous">
     <style>
         body {
@@ -14,7 +14,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow: auto; /* Allow scrolling for towns */
         }
         .upper-section {
             background-color: #2e2e2e; /* Matte dark grey for upper section */
@@ -24,60 +24,84 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            min-height: 50vh; /* Ensure upper section takes up space */
         }
         .content {
             text-align: left;
             max-width: 800px;
-            margin-left: -250px; /* Shift left */
+            margin: 0 auto; /* Center horizontally */
             display: flex;
             flex-direction: column;
             justify-content: center;
             height: 100%;
         }
         .summary h1 {
-            font-family: 'Montserrat', sans-serif; /* Bold, modern font like the image */
-            font-weight: 700; /* Bold weight to match the image's title */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
             font-size: 3rem;
             margin-bottom: 20px;
-            line-height: 1.2; /* Shorter, equal line spacing */
-            text-transform: uppercase; /* Match the all-caps style of the image */
+            line-height: 1.2;
+            text-transform: uppercase;
         }
         .summary p {
-            font-family: 'Roboto Condensed', sans-serif; /* Lighter font for summary */
-            font-weight: 300; /* Light weight for contrast */
-            font-size: 1.6rem; /* Slightly smaller letters */
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 300;
+            font-size: 1.6rem;
             margin: 0;
-            line-height: 1.2; /* Equal to h1 for consistency */
+            line-height: 1.2;
         }
         .lower-section {
-            background-color: #ffffff; /* White background for lower section */
+            background-color: #ffffff;
             color: #2e2e2e;
             padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
         .nav-links {
-            display: grid;
-            grid-template-columns: repeat(5, auto); /* Five columns */
-            grid-template-rows: repeat(2, auto); /* Two rows */
-            gap: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Remove gap for continuous lines */
         }
-        .nav-links a {
+        .town-item {
+            position: relative;
+            width: 100%;
+            padding: 15px 0;
+            border-top: 1px solid #e0e0e0; /* Thin horizontal line */
+        }
+        .town-item:last-child {
+            border-bottom: 1px solid #e0e0e0; /* Add line to last item */
+        }
+        .town-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0 20px;
+        }
+        .town-header a {
             color: #2e2e2e;
             text-decoration: none;
             font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 300; /* Light weight to match navigation in the image */
+            font-weight: 300;
             font-size: 1.2rem;
             letter-spacing: 1px;
-            padding: 8px 12px;
-            background-color: #e0e0e0; /* Light grey button on white background */
-            border-radius: 4px;
-            text-align: center;
-            transition: background-color 0.3s;
         }
-        .nav-links a:hover {
-            background-color: #b0b0b0; /* Darker grey on hover */
+        .town-header .arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .town-header .arrow.down {
+            transform: rotate(90deg); /* Rotate arrow when expanded */
+        }
+        .intersections {
+            display: none; /* Hidden by default */
+            padding: 10px 20px;
+            background-color: #f8f8f8; /* Slightly off-white for contrast */
+        }
+        .intersections.show {
+            display: block; /* Show when toggled */
         }
         @media (max-width: 768px) {
             .summary h1 {
@@ -86,17 +110,14 @@
             .summary p {
                 font-size: 1.2rem;
             }
-            .nav-links {
-                grid-template-columns: repeat(5, auto);
-                grid-template-rows: repeat(2, auto);
-                gap: 5px;
-            }
-            .nav-links a {
-                font-size: 1rem;
-                padding: 6px 10px;
-            }
             .content {
-                margin-left: -100px;
+                margin: 0 10px;
+            }
+            .town-header a {
+                font-size: 1rem;
+            }
+            .town-header .arrow {
+                font-size: 1rem;
             }
         }
     </style>
@@ -112,16 +133,96 @@
     </div>
     <div class="lower-section">
         <div class="nav-links">
-            <a href="amherst.html">Amherst</a>
-            <a href="cheektowaga.html">Cheektowaga</a>
-            <a href="hamburg.html">Hamburg</a>
-            <a href="west-seneca.html">West Seneca</a>
-            <a href="tonawanda.html">Tonawanda</a>
-            <a href="lancaster.html">Lancaster</a>
-            <a href="buffalo.html">Buffalo</a>
-            <a href="orchard-park.html">Orchard Park</a>
-            <a href="grand-island.html">Grand Island</a>
-            <a href="evans.html">Evans</a>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="amherst.html">Amherst</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Amherst will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="cheektowaga.html">Cheektowaga</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Cheektowaga will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="hamburg.html">Hamburg</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Hamburg will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="west-seneca.html">West Seneca</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for West Seneca will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="tonawanda.html">Tonawanda</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Tonawanda will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="lancaster.html">Lancaster</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Lancaster will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="buffalo.html">Buffalo</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Buffalo will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="orchard-park.html">Orchard Park</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Orchard Park will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="grand-island.html">Grand Island</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Grand Island will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
+            <div class="town-item">
+                <div class="town-header" onclick="toggleIntersections(this)">
+                    <a href="evans.html">Evans</a>
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="intersections">
+                    <p>Intersections for Evans will be displayed here. (Placeholder)</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
