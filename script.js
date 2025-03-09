@@ -20,16 +20,34 @@ async function fetchTrafficData(location) {
             throw new Error(data.error);
         }
 
-        const locationData = `
-            <h3>${data.location}</h3>
-            <p>Days Saved per Year: ${data.days_saved}</p>
-            <p>Cost Saved (USD): $${data.cost_saved_usd}</p>
-        `;
-        trafficDiv.innerHTML += locationData;
+        const table = trafficDiv.querySelector("table") || createTable(trafficDiv);
+        const row = table.insertRow();
+        row.insertCell(0).textContent = data.location;
+        row.insertCell(1).textContent = data.days_saved.toLocaleString();
+        row.insertCell(2).textContent = `$${data.cost_saved_usd.toLocaleString()}`;
     } catch (error) {
         console.error("Error fetching traffic data:", error);
         trafficDiv.innerHTML += `<p class="error">Error fetching data for ${location}: ${error.message}</p>`;
     }
+}
+
+// Function to create a table for traffic data
+function createTable(container) {
+    container.innerHTML = `
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Location</th>
+                        <th>Days Saved per Year</th>
+                        <th>Cost Saved (USD)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    `;
+    return container.querySelector("table");
 }
 
 // Function to fetch and display summary data for all locations
@@ -47,14 +65,13 @@ async function fetchTrafficSummary() {
         }
         const data = await response.json();
 
-        const summaryData = `
+        summaryDiv.innerHTML = `
             <h3>Traffic Summary</h3>
-            <p>Total Locations: ${data.total_locations}</p>
-            <p>Locations: ${data.locations.join(", ")}</p>
-            <p>Total Days Saved: ${data.total_days_saved}</p>
-            <p>Total Cost Saved (USD): $${data.total_cost_saved_usd}</p>
+            <p><strong>Total Locations:</strong> ${data.total_locations}</p>
+            <p><strong>Locations:</strong> ${data.locations.join(", ")}</p>
+            <p><strong>Total Days Saved:</strong> ${data.total_days_saved.toLocaleString()}</p>
+            <p><strong>Total Cost Saved (USD):</strong> $${data.total_cost_saved_usd.toLocaleString()}</p>
         `;
-        summaryDiv.innerHTML = summaryData;
     } catch (error) {
         console.error("Error fetching traffic summary:", error);
         summaryDiv.innerHTML = `<p class="error">Error fetching summary: ${error.message}</p>`;
@@ -71,20 +88,13 @@ function initializeTrafficData() {
         return;
     }
 
-    trafficDiv.innerHTML = "";
-    summaryDiv.innerHTML = "";
+    trafficDiv.innerHTML = "<p>Loading traffic data...</p>";
+    summaryDiv.innerHTML = "<p>Loading summary...</p>";
 
     const locations = [
-        "main_st_bailey",
-        "walden_bailey",
-        "hertel_main",
-        "clinton_bailey",
-        "transit_sheridan",
-        "ferry_mass_richmond",
-        "porter_jersey_normal",
-        "niagara_east_robinson",
-        "elmwood_forest",
-        "grant_ferry"
+        "main_st_bailey", "walden_bailey", "hertel_main", "clinton_bailey",
+        "transit_sheridan", "ferry_mass_richmond", "porter_jersey_normal",
+        "niagara_east_robinson", "elmwood_forest", "grant_ferry"
     ];
     locations.forEach(location => fetchTrafficData(location));
 
