@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buffalo Traffic Optimization Dashboard</title>
-    <!-- Google Fonts for Montserrat (bold title) and Roboto Condensed (summary/towns) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Condensed:wght@300;700&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for Montserrat (bold title), Roboto Condensed (summary), and Courgette (lower section) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Condensed:wght@300;700&family=Courgette&display=swap" rel="stylesheet" crossorigin="anonymous">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -19,11 +19,13 @@
         .upper-section {
             background-color: #2e2e2e; /* Matte dark grey for upper section */
             color: #ffffff;
-            height: 83.33vh; /* 5/6 of the viewport height (100 / 6 * 5) */
+            height: auto; /* Adjust height dynamically */
+            min-height: 100vh; /* Ensure it covers the viewport initially */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            flex-direction: column;
         }
         .content {
             text-align: left;
@@ -32,7 +34,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
+            height: 100vh; /* Full viewport height */
         }
         .summary h1 {
             font-family: 'Montserrat', sans-serif;
@@ -49,38 +51,22 @@
             margin: 0;
             line-height: 1.2;
         }
-        .scroll-prompt {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #ffffff;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 300;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-        .scroll-prompt .arrow {
-            font-size: 1.5rem;
-            margin-top: 5px;
-            animation: bounce 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
+        .spacer {
+            height: 100px; /* Space to push towns below the viewport */
         }
         .lower-section {
             background-color: #ffffff; /* White background for lower section */
-            color: #2e2e2e;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 16.67vh; /* 1/6 of the viewport height (100 / 6) */
+        }
+        .locations-label {
+            font-family: 'Courgette', cursive;
+            font-size: 1.5rem;
+            color: #2e2e2e; /* Match upper section color */
+            margin-bottom: 20px;
+            text-align: center;
         }
         .nav-links {
             width: 100%;
@@ -92,10 +78,10 @@
             position: relative;
             width: 100%;
             padding: 15px 0;
-            border-top: 1px solid #e0e0e0; /* Thin horizontal line */
+            border-top: 1px solid #2e2e2e; /* Thin horizontal line, matching upper section color */
         }
         .town-item:last-child {
-            border-bottom: 1px solid #e0e0e0; /* Add line to last item */
+            border-bottom: 1px solid #2e2e2e; /* Add line to last item */
         }
         .town-header {
             display: flex;
@@ -105,15 +91,17 @@
             padding: 0 20px;
         }
         .town-header a {
-            color: #2e2e2e;
+            color: #2e2e2e; /* Match upper section color */
             text-decoration: none;
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 300;
+            font-family: 'Courgette', cursive;
             font-size: 1.2rem;
             letter-spacing: 1px;
+            text-align: center;
+            width: 100%; /* Center text within flex item */
         }
         .town-header .arrow {
             font-size: 1.2rem;
+            color: #2e2e2e; /* Match upper section color */
             transition: transform 0.3s;
         }
         .town-header .arrow.down {
@@ -129,7 +117,10 @@
         }
         @media (max-width: 768px) {
             .upper-section {
-                height: 83.33vh; /* Maintain 5/6 ratio */
+                min-height: 100vh;
+            }
+            .content {
+                margin: 0 10px;
             }
             .summary h1 {
                 font-size: 2.2rem;
@@ -137,19 +128,13 @@
             .summary p {
                 font-size: 1.2rem;
             }
-            .content {
-                margin: 0 10px;
-            }
             .town-header a {
                 font-size: 1rem;
             }
             .town-header .arrow {
                 font-size: 1rem;
             }
-            .scroll-prompt {
-                font-size: 1rem;
-            }
-            .scroll-prompt .arrow {
+            .locations-label {
                 font-size: 1.2rem;
             }
         }
@@ -163,12 +148,11 @@
                 <p>Real-time traffic analytics, showing insight on benefits from AI-controlled traffic lights delivering by minimizing delays and reducing costs at key intersections.</p>
             </div>
         </div>
-        <div class="scroll-prompt" onclick="window.scrollTo({top: document.querySelector('.lower-section').offsetTop, behavior: 'smooth'})">
-            <span>Locations</span>
-            <span class="arrow">▼</span>
-        </div>
+        <div class="spacer"></div>
+        <!-- Ensure towns are below the viewport -->
     </div>
     <div class="lower-section">
+        <div class="locations-label">Locations</div>
         <div class="nav-links">
             <div class="town-item">
                 <div class="town-header" onclick="toggleIntersections(this)">
