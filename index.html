@@ -25,7 +25,7 @@
             align-items: center;
             position: relative;
             flex-direction: column;
-            min-height: calc(100vh - 240px); /* Adjusted to end above Amherst */
+            min-height: calc(100vh - 80px); /* Adjusted to end above Amherst */
         }
         .content {
             text-align: left;
@@ -106,16 +106,16 @@
         }
         .intersections {
             display: none; /* Hidden by default */
-            padding: 2px 20px; /* Further reduced padding to move closer to town names */
+            padding: 2px 20px; /* Reduced padding */
             background-color: #f8f8f8; /* Slightly off-white for contrast */
-            margin-top: 2px; /* Further reduced spacing above dropdown */
+            margin-top: 2px; /* Reduced spacing above dropdown */
         }
         .intersections.show {
             display: block; /* Show when toggled */
         }
         @media (max-width: 768px) {
             .upper-section {
-                min-height: calc(100vh - 200px); /* Adjusted for mobile */
+                min-height: calc(100vh - 60px); /* Adjusted for mobile */
             }
             .content {
                 margin: 0 10px;
