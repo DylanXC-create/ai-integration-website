@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const content = document.querySelector(".content");
     if (content) {
         setTimeout(() => {
-            content.style.opacity = "1";
+            content.classList.add("loaded");
         }, 500); // Delay for background visibility
     }
 });

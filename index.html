@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buffalo Traffic Optimization Dashboard</title>
-    <!-- Google Fonts for a modern, skinny font -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <!-- Google Fonts for modern, skinny font and taller summary font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto+Slab:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -15,15 +15,20 @@
             padding: 0;
             height: 100vh;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Center horizontally */
             align-items: center;
             flex-direction: column;
             overflow: hidden;
         }
         .content {
-            text-align: center;
+            text-align: left; /* Left-align text within the block */
             opacity: 0; /* Initially hidden for fade-in effect */
             transition: opacity 1s ease-in;
+            max-width: 800px; /* Limit width for centered block */
+            margin-left: -100px; /* Shift slightly to the left */
+        }
+        .content.loaded {
+            opacity: 1;
         }
         .header-label {
             position: absolute;
@@ -35,17 +40,18 @@
             color: #ffffff;
             letter-spacing: 2px;
         }
-        .summary {
-            max-width: 800px;
-        }
         .summary h1 {
+            font-family: 'Roboto Condensed', sans-serif; /* Retain skinny font */
+            font-weight: 300;
             font-size: 2.5rem;
             margin-bottom: 20px;
             line-height: 1.2;
         }
         .summary p {
+            font-family: 'Roboto Slab', sans-serif; /* Taller, condensed font for summary */
             font-size: 1.5rem;
             margin: 0;
+            line-height: 1.4; /* Adjust line height for taller appearance */
         }
         @media (max-width: 768px) {
             .summary h1 {
@@ -59,6 +65,9 @@
                 top: 15px;
                 left: 15px;
             }
+            .content {
+                margin-left: -50px; /* Adjust shift for mobile */
+            }
         }
     </style>
 </head>
@@ -66,8 +75,8 @@
     <div class="header-label">AI Traffic Optimization</div>
     <div class="content">
         <div class="summary">
-            <h1>Optimizing Buffalo's Traffic Flow</h1>
-            <p>Real-time traffic analytics powered by AI, delivering insights to minimize delays and reduce costs at key intersections.</p>
+            <h1>AI Traffic Optimization</h1>
+            <p>Real-time traffic analytics, showing insight on benefits from AI-controlled traffic lights delivering by minimizing delays and reducing costs at key intersections.</p>
         </div>
     </div>
     <script src="script.js"></script>
