@@ -19,12 +19,11 @@
         .upper-section {
             background-color: #2e2e2e; /* Matte dark grey for upper section */
             color: #ffffff;
-            flex: 1;
+            height: 83.33vh; /* 5/6 of the viewport height (100 / 6 * 5) */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            min-height: 50vh; /* Ensure upper section takes up space */
         }
         .content {
             text-align: left;
@@ -50,13 +49,38 @@
             margin: 0;
             line-height: 1.2;
         }
+        .scroll-prompt {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #ffffff;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-weight: 300;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .scroll-prompt .arrow {
+            font-size: 1.5rem;
+            margin-top: 5px;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
         .lower-section {
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background for lower section */
             color: #2e2e2e;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 16.67vh; /* 1/6 of the viewport height (100 / 6) */
         }
         .nav-links {
             width: 100%;
@@ -104,6 +128,9 @@
             display: block; /* Show when toggled */
         }
         @media (max-width: 768px) {
+            .upper-section {
+                height: 83.33vh; /* Maintain 5/6 ratio */
+            }
             .summary h1 {
                 font-size: 2.2rem;
             }
@@ -119,6 +146,12 @@
             .town-header .arrow {
                 font-size: 1rem;
             }
+            .scroll-prompt {
+                font-size: 1rem;
+            }
+            .scroll-prompt .arrow {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -129,6 +162,10 @@
                 <h1>AI Traffic Optimization</h1>
                 <p>Real-time traffic analytics, showing insight on benefits from AI-controlled traffic lights delivering by minimizing delays and reducing costs at key intersections.</p>
             </div>
+        </div>
+        <div class="scroll-prompt" onclick="window.scrollTo({top: document.querySelector('.lower-section').offsetTop, behavior: 'smooth'})">
+            <span>Locations</span>
+            <span class="arrow">▼</span>
         </div>
     </div>
     <div class="lower-section">
